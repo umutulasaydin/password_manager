@@ -5,6 +5,7 @@ import random
 def generate():
 
     #taking all possible letters, numbers and symbols
+    #This will be added env variable
     upper_cases = """ABCDEFGHIJKLMNOQRSTUVWXYZ"""
     lower_cases = """abcdefghijklmnopqrstuyvwxyz"""
     numbers = """0123456789"""
@@ -17,6 +18,7 @@ def generate():
     a += random.sample(numbers, 3)
     a += random.sample(symbols, 3)
     
+    #shuffle
     random.shuffle(a)
 
     password = ""
@@ -27,5 +29,5 @@ def generate():
     return password
 
 
-print(generate())
+
     
