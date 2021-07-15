@@ -57,4 +57,3 @@ def delete_all_pass():
 
 
 
-delete_login()
