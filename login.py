@@ -1,7 +1,21 @@
 import tkinter as tk
+from tkinter import messagebox as mb
+import database
+
 
 
 def register():
+
+    def registry():
+
+        nickname = e1.get()
+        password = e2.get()
+
+        database.add_login(nickname, password)
+        mb.showinfo(title="Sign Up", message="Signed Up")
+        register.withdraw()
+        
+
 
     register = tk.Tk()
     register.geometry("250x250")
@@ -21,16 +35,15 @@ def register():
     l2 = tk.Label(register, text = "Password")
     l2.grid(row = 1, column = 0)
 
-    v1 = tk.StringVar()
-    v2 = tk.StringVar()
 
-    e1 = tk.Entry(register, textvariable = v1)
+    
+    e1 = tk.Entry(register)
     e1.grid(row = 0, column = 1)
 
-    e2 = tk.Entry(register, textvariable = v2)
+    e2 = tk.Entry(register)
     e2.grid(row = 1, column = 1)
 
-    b1 = tk.Button(register, text = "Sign Up")
+    b1 = tk.Button(register, text = "Sign Up", command=registry)
     b1.grid(row = 2, column = 1, padx = 3, pady = 3)
 
     register.mainloop()
@@ -70,4 +83,3 @@ def login():
 
     login.mainloop()
 
-login()
