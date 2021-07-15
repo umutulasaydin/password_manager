@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox as mb
-import database
+import database as db
 
 
 
@@ -11,9 +11,15 @@ def register():
         nickname = e1.get()
         password = e2.get()
 
-        database.add_login(nickname, password)
-        mb.showinfo(title="Sign Up", message="Signed Up")
-        register.withdraw()
+        if nickname == "" or password == "":
+            mb.showerror(title="Sign Up", message="Please, fill blanks!")
+            register()
+        
+        else:
+
+            db.add_login(nickname, password)
+            mb.showinfo(title="Sign Up", message="Signed Up")
+            register.withdraw()
         
 
 
@@ -51,6 +57,24 @@ def register():
 
 def login():
 
+    def check():
+        
+        nickname = e1.get()
+        password = e2.get()
+        info = db.find_user_info()
+        
+
+        if info[0] == nickname and info[1] == password:
+
+            mb.showinfo(title = "Login", message = "Login succesfull!")
+            login.withdraw()
+        
+        else:
+            mb.showerror(title = "Login", message = "Nickname or password is wrong!")
+            login.withdraw()
+            exit()
+
+
     login = tk.Tk()
     login.geometry("250x250")
     login.title("Password Manager")
@@ -69,17 +93,19 @@ def login():
     l2 = tk.Label(login, text = "Password")
     l2.grid(row = 1, column = 0)
 
-    v1 = tk.StringVar()
-    v2 = tk.StringVar()
 
-    e1 = tk.Entry(login, textvariable = v1)
+    e1 = tk.Entry(login)
     e1.grid(row = 0, column = 1)
 
-    e2 = tk.Entry(login, textvariable = v2)
+    e2 = tk.Entry(login)
     e2.grid(row = 1, column = 1)
 
-    b1 = tk.Button(login, text = "Sign In")
+    b1 = tk.Button(login, text = "Sign In", command=check)
     b1.grid(row = 2, column = 1, padx = 3, pady = 3)
 
+    
+
     login.mainloop()
+
+    
 
